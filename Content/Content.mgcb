@@ -25,6 +25,13 @@
 /processorParam:Quality=Low
 /build:audio/tx0_fire1.wav
 
+#begin message_font_small.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:message_font_small.spritefont
+
 #begin message_font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

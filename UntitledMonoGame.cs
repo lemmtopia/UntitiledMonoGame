@@ -14,6 +14,7 @@ namespace UntitiledMonoGame;
 public class UntitledMonoGame : Core
 {
     private SpriteFont _font;
+    private SpriteFont _fontSmall;
 
     private Texture2D _backgroundTexture;
     private Sprite _background;
@@ -30,6 +31,7 @@ public class UntitledMonoGame : Core
 
     private bool _mouseControl = false;
     private string _controlText = "Keyboard/GamePad Control";
+    private string _inputActionsText = "WASD/Arrow Keys/DPad/LeftStick - Move\nSpace/A (GamePad) - Fire\nX (GamePad) - Test Vibration";
 
     public UntitledMonoGame() : base("Untitled", 800, 480, false)
     {
@@ -56,6 +58,7 @@ public class UntitledMonoGame : Core
     protected override void LoadContent()
     {
         _font = Content.Load<SpriteFont>("message_font");
+        _fontSmall = Content.Load<SpriteFont>("message_font_small");
         _linkinParkInTheEnd = Content.Load<Song>("audio/linkin-park_in-the-end");
         _soundEffect = Content.Load<SoundEffect>("audio/tx0_fire1");
 
@@ -89,10 +92,12 @@ public class UntitledMonoGame : Core
             if (_mouseControl)
             {
                 _controlText = "Mouse Control";
+                _inputActionsText = "Left Click - Fire";
             }
             else
             {
                 _controlText = "Keyboard/GamePad Control";
+                _inputActionsText = "WASD/Arrow Keys/DPad/LeftStick - Move\nSpace/A (GamePad) - Fire\nX (GamePad) - Test Vibration";
             }
         }
 
@@ -157,7 +162,8 @@ public class UntitledMonoGame : Core
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
         _background.Draw(SpriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
-        SpriteBatch.DrawString(_font, _controlText, new Vector2(12, 8), Color.Black);
+        SpriteBatch.DrawString(_font, _controlText, new Vector2(12, 360), Color.Black);
+        SpriteBatch.DrawString(_fontSmall, _inputActionsText, new Vector2(12, 400), Color.Black);
 
         _tileset.Draw(SpriteBatch, new Rectangle(64, 64, 32, 32), Color.White);
         _smileyWalk.Draw(SpriteBatch, new Rectangle((int)_smileyX, (int)_smileyY, 64, 64), Color.White);
