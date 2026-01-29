@@ -35,6 +35,9 @@
 #begin sprites/SmileyWalk.xml
 /copy:sprites/SmileyWalk.xml
 
+#begin sprites/TileSet.xml
+/copy:sprites/TileSet.xml
+
 #begin textures/background.png
 /importer:TextureImporter
 /processor:TextureProcessor

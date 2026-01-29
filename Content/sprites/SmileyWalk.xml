@@ -3,5 +3,5 @@
     <Texture>textures/SmileyWalk</Texture>
     <Columns>4</Columns>
     <Rows>4</Rows>
-    <AnimationSpeed>1.0</AnimationSpeed>
+    <AnimationSpeed>3.0</AnimationSpeed>
 </AnimatedSprite>

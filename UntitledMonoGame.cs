@@ -17,11 +17,9 @@ public class UntitledMonoGame : Core
 
     private Texture2D _backgroundTexture;
     private Sprite _background;
-    
-    private Texture2D _tilesetTexture;
-    private SpriteRegion _tileset;
 
-    AnimatedSprite _smileyWalk;
+    private AnimatedSprite _smileyWalk;
+    private AnimatedSprite _tileset;
 
     private Song _linkinParkInTheEnd;
     private SoundEffect _soundEffect;
@@ -61,13 +59,11 @@ public class UntitledMonoGame : Core
         _linkinParkInTheEnd = Content.Load<Song>("audio/linkin-park_in-the-end");
         _soundEffect = Content.Load<SoundEffect>("audio/tx0_fire1");
 
-        _tilesetTexture = Content.Load<Texture2D>("textures/tileset");
-        _tileset = new SpriteRegion(_tilesetTexture, new Rectangle(128, 0, 32, 32));
-
         _backgroundTexture = Content.Load<Texture2D>("textures/background");
         _background = new Sprite(_backgroundTexture);
 
         _smileyWalk = AnimatedSprite.FromFile(Content, "sprites/SmileyWalk.xml");
+        _tileset = AnimatedSprite.FromFile(Content, "sprites/TileSet.xml");
     }
 
     protected override void Update(GameTime gameTime)
@@ -81,7 +77,7 @@ public class UntitledMonoGame : Core
             MediaPlayer.Volume = 0.6f;
         }
 
-
+        _tileset.Update(dt);
         _smileyWalk.Update(dt);
 
         GamePadInfo gamePadOne = Input.GamePads[(int)PlayerIndex.One];
@@ -161,9 +157,9 @@ public class UntitledMonoGame : Core
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
         _background.Draw(SpriteBatch, new Rectangle(0, 0, 800, 480), Color.White);
-        _tileset.Draw(SpriteBatch, new Rectangle(64, 64, 32, 32), Color.White);
         SpriteBatch.DrawString(_font, _controlText, new Vector2(12, 8), Color.Black);
 
+        _tileset.Draw(SpriteBatch, new Rectangle(64, 64, 32, 32), Color.White);
         _smileyWalk.Draw(SpriteBatch, new Rectangle((int)_smileyX, (int)_smileyY, 64, 64), Color.White);
 
         SpriteBatch.End();

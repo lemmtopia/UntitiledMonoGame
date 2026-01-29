@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AnimatedSprite>
+    <Texture>textures/tileset</Texture>
+    <Columns>5</Columns>
+    <Rows>5</Rows>
+    <AnimationSpeed>0.5</AnimationSpeed>
+</AnimatedSprite>

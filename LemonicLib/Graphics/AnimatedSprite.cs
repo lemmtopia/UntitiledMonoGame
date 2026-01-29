@@ -60,8 +60,8 @@ public class AnimatedSprite : Sprite
         int frameW = Width / Columns;
         int frameH = Height / Rows;
 
-        int column = _currentFrame / Columns;
-        int row = _currentFrame % Columns;
+        int column = _currentFrame % Columns;
+        int row = _currentFrame / Columns;
 
         Rectangle sourceRect = new Rectangle(column * frameW, row * frameH, frameW, frameH);
 
