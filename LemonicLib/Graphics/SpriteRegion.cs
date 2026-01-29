@@ -6,15 +6,15 @@ namespace LemonicLib.Graphics;
 
 public class SpriteRegion : Sprite
 {
-    public Rectangle RegionRectangle { get; set; }
+    public Rectangle Region { get; set; }
 
-    public SpriteRegion(Texture2D texture, Rectangle regionRect) : base (texture)
+    public SpriteRegion(Texture2D texture, Rectangle region) : base (texture)
     {
-        RegionRectangle = regionRect;
+        Region = region;
     }
 
     public override void Draw(SpriteBatch spriteBatch, Rectangle destination, Color color)
     {
-        spriteBatch.Draw(Texture, destination, RegionRectangle, color);
+        spriteBatch.Draw(Texture, destination, Region, color);
     }
 }
