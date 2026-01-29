@@ -45,6 +45,13 @@ public class UntitledMonoGame : Core
 
         _smileyX = 400;
         _smileyY = 300;
+
+        Input.AddAction("Left", [ Keys.Left, Keys.A ], [ Buttons.DPadLeft ], []);
+        Input.AddAction("Right", [ Keys.Right, Keys.D ], [ Buttons.DPadRight ], []);
+        Input.AddAction("Up", [ Keys.Up, Keys.W ], [ Buttons.DPadUp ], []);
+        Input.AddAction("Down", [ Keys.Down, Keys.S ], [ Buttons.DPadDown ], []);
+        Input.AddAction("Fire", [ Keys.Space ], [ Buttons.A ], [ MouseButton.Left ]);
+        Input.AddAction("GamePadVibrationTest", [ ], [ Buttons.X ], [ ]);
     }
 
     protected override void LoadContent()
@@ -93,19 +100,13 @@ public class UntitledMonoGame : Core
             }
         }
 
-        bool action = false;
-
         if (_mouseControl)
         {
             _smileyX = Input.Mouse.X;
             _smileyY = Input.Mouse.Y;
-
-            action = Input.Mouse.IsButtonPressed(MouseButton.Left);
         }
         else
         {
-            action = Input.Keyboard.IsKeyPressed(Keys.Z) || gamePadOne.IsButtonPressed(Buttons.A);
-
             if (gamePadOne.IsButtonPressed(Buttons.B))
             {
                 gamePadOne.SetVibration(0.5f, TimeSpan.FromSeconds(1));
@@ -118,31 +119,26 @@ public class UntitledMonoGame : Core
             }
             else 
             {
-                bool left = Input.Keyboard.IsKeyDown(Keys.Left) || gamePadOne.IsButtonDown(Buttons.DPadLeft);
-                bool right = Input.Keyboard.IsKeyDown(Keys.Right) || gamePadOne.IsButtonDown(Buttons.DPadRight);
-                bool up = Input.Keyboard.IsKeyDown(Keys.Up) || gamePadOne.IsButtonDown(Buttons.DPadUp);
-                bool down = Input.Keyboard.IsKeyDown(Keys.Down) || gamePadOne.IsButtonDown(Buttons.DPadDown);
-
-                if (left)
+                if (Input.IsActionDown(PlayerIndex.One, "Left"))
                 {
                     _smileyX -= _smileySpeed * dt;
                 }
-                if (right)
+                if (Input.IsActionDown(PlayerIndex.One, "Right"))
                 {
                     _smileyX += _smileySpeed * dt;
                 }
-                if (up)
+                if (Input.IsActionDown(PlayerIndex.One, "Up"))
                 {
                     _smileyY -= _smileySpeed * dt;
                 }
-                if (down)
+                if (Input.IsActionDown(PlayerIndex.One, "Down"))
                 {
                     _smileyY += _smileySpeed * dt;
                 }
             }
         }
 
-        if (action)
+        if (Input.IsActionPressed(PlayerIndex.One, "Fire"))
         {
             _soundEffect.Play();
         }
