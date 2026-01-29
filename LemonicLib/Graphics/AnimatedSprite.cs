@@ -1,5 +1,9 @@
 using System;
+using System.IO;
+using System.Xml;
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LemonicLib.Graphics;
@@ -17,6 +21,11 @@ public class AnimatedSprite : Sprite
 
     public float AnimationSpeed;
     private float _currentTime;
+
+    public AnimatedSprite() : base()
+    {
+        
+    }
 
     public AnimatedSprite(Texture2D texture, int rows, int columns, float animationSpeed) : base(texture)
     {
@@ -57,5 +66,34 @@ public class AnimatedSprite : Sprite
         Rectangle sourceRect = new Rectangle(column * frameW, row * frameH, frameW, frameH);
 
         spriteBatch.Draw(Texture, destination, sourceRect, color);
+    }
+
+    public static AnimatedSprite FromFile(ContentManager content, string fileName)
+    {
+        AnimatedSprite sprite = new AnimatedSprite();
+
+        string filePath = Path.Combine(content.RootDirectory, fileName);
+
+        using (Stream stream = TitleContainer.OpenStream(filePath))
+        {
+            using (XmlReader reader = XmlReader.Create(stream))
+            {
+                XDocument doc = XDocument.Load(reader);
+                XElement root = doc.Root;
+
+                string texturePath = root.Element("Texture").Value;
+                sprite.Texture = content.Load<Texture2D>(texturePath);
+
+                sprite.Columns = int.Parse(root.Element("Columns").Value);
+                sprite.Rows = int.Parse(root.Element("Rows").Value);
+                sprite.AnimationSpeed = float.Parse(root.Element("AnimationSpeed").Value);
+
+                sprite._currentTime = 0;
+                sprite._currentFrame = 0;
+                sprite._totalFrames = sprite.Rows * sprite.Columns;
+            }
+        }
+
+        return sprite;
     }
 }

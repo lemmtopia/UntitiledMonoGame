@@ -11,6 +11,11 @@ public class Sprite
     public int Width => Texture.Width;
     public int Height => Texture.Height;
 
+    public Sprite()
+    {
+        
+    }
+
     public Sprite(Texture2D texture)
     {
         Texture = texture;

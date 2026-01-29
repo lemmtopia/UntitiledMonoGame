@@ -8,6 +8,11 @@ public class SpriteRegion : Sprite
 {
     public Rectangle Region { get; set; }
 
+    public SpriteRegion() : base()
+    {
+        
+    }
+
     public SpriteRegion(Texture2D texture, Rectangle region) : base (texture)
     {
         Region = region;

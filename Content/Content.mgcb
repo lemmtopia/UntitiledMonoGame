@@ -32,6 +32,9 @@
 /processorParam:TextureFormat=Compressed
 /build:message_font.spritefont
 
+#begin sprites/SmileyWalk.xml
+/copy:sprites/SmileyWalk.xml
+
 #begin textures/background.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -21,7 +21,6 @@ public class UntitledMonoGame : Core
     private Texture2D _tilesetTexture;
     private SpriteRegion _tileset;
 
-    private Texture2D _smileyWalkTetxure;
     AnimatedSprite _smileyWalk;
 
     private Song _linkinParkInTheEnd;
@@ -68,8 +67,7 @@ public class UntitledMonoGame : Core
         _backgroundTexture = Content.Load<Texture2D>("textures/background");
         _background = new Sprite(_backgroundTexture);
 
-        _smileyWalkTetxure = Content.Load<Texture2D>("textures/SmileyWalk");
-        _smileyWalk = new AnimatedSprite(_smileyWalkTetxure, 4, 4, 8f);
+        _smileyWalk = AnimatedSprite.FromFile(Content, "sprites/SmileyWalk.xml");
     }
 
     protected override void Update(GameTime gameTime)
