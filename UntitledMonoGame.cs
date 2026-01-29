@@ -50,8 +50,10 @@ public class UntitledMonoGame : Core
         Input.AddAction("Right", [ Keys.Right, Keys.D ], [ Buttons.DPadRight ], []);
         Input.AddAction("Up", [ Keys.Up, Keys.W ], [ Buttons.DPadUp ], []);
         Input.AddAction("Down", [ Keys.Down, Keys.S ], [ Buttons.DPadDown ], []);
-        Input.AddAction("Fire", [ Keys.Space ], [ Buttons.A ], [ MouseButton.Left ]);
-        Input.AddAction("GamePadVibrationTest", [ ], [ Buttons.X ], [ ]);
+        Input.AddAction("Fire", [ Keys.Space ], [ Buttons.A ], []);
+        Input.AddAction("MouseFire", [], [], [ MouseButton.Left ]);
+        Input.AddAction("GamePadVibrationTest", [], [ Buttons.X ], []);
+        Input.AddAction("ToggleMouseControl", [ Keys.V ], [], []);
     }
 
     protected override void LoadContent()
@@ -86,7 +88,7 @@ public class UntitledMonoGame : Core
 
         GamePadInfo gamePadOne = Input.GamePads[(int)PlayerIndex.One];
         
-        if (Input.Keyboard.IsKeyPressed(Keys.V))
+        if (Input.IsActionPressed(PlayerIndex.One, "ToggleMouseControl"))
         {
             _mouseControl = !_mouseControl;
 
@@ -104,12 +106,22 @@ public class UntitledMonoGame : Core
         {
             _smileyX = Input.Mouse.X;
             _smileyY = Input.Mouse.Y;
+
+            if (Input.IsActionPressed(PlayerIndex.One, "MouseFire"))
+            {
+                _soundEffect.Play();
+            }
         }
         else
         {
-            if (gamePadOne.IsButtonPressed(Buttons.B))
+            if (Input.IsActionPressed(PlayerIndex.One, "GamePadVibrationTest"))
             {
                 gamePadOne.SetVibration(0.5f, TimeSpan.FromSeconds(1));
+            }
+
+            if (Input.IsActionPressed(PlayerIndex.One, "Fire"))
+            {
+                _soundEffect.Play();
             }
 
             if (gamePadOne.LeftThumbStick != Vector2.Zero)
@@ -136,11 +148,6 @@ public class UntitledMonoGame : Core
                     _smileyY += _smileySpeed * dt;
                 }
             }
-        }
-
-        if (Input.IsActionPressed(PlayerIndex.One, "Fire"))
-        {
-            _soundEffect.Play();
         }
 
         _smileyX = MathHelper.Clamp(_smileyX, 0, 800 - 64);
