@@ -16,13 +16,13 @@
 #begin audio/linkin-park_in-the-end.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
-/processorParam:Quality=Best
+/processorParam:Quality=Low
 /build:audio/linkin-park_in-the-end.mp3
 
 #begin audio/tx0_fire1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
-/processorParam:Quality=Best
+/processorParam:Quality=Low
 /build:audio/tx0_fire1.wav
 
 #begin message_font.spritefont
